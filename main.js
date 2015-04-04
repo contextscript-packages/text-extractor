@@ -1,6 +1,4 @@
-import * as _ from 'underscore';
-export function main(skipSelectors){
-  console.log(_);
+export default ({skipSelectors}) => {
   if(!skipSelectors) {
     skipSelectors = []
   } else if(typeof skipSelectors === "string") {
@@ -13,7 +11,7 @@ export function main(skipSelectors){
   var n;
   var text;
   while(n=walk.nextNode()) {
-    if(skipSelectors.some((selector)=> n.matches(selector))) {
+    if(("matches" in n) && skipSelectors.some((selector)=> n.matches(selector))) {
       n = walk.nextSibling();
     }
     if(n.nodeType !== 3) continue;

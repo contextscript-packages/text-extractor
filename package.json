@@ -1,0 +1,9 @@
+{
+  "name": "text-extractor",
+  "main": "main.js",
+  "version": "0.0.0",
+  "dependencies": {
+    "underscore": "1"
+  },
+  "license": "MIT"
+}

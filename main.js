@@ -23,14 +23,17 @@ export default (options) => {
     if(n.parentElement.tagName in {"STYLE":"", "SCRIPT":"", "NOSCRIPT":""}) continue;
     text = n.nodeValue.trim();
     if(text === '') continue;
+    if(fullText.slice(-1) !== " ") {
+      fullText += " ";
+    }
     nodeMappings = nodeMappings.concat([
       {
-        start: fullText.length + 1,
-        end: fullText.length + 1 + text.length,
+        start: fullText.length,
+        end: fullText.length + text.length,
         node: n
       }
     ]);
-    fullText += " " + text;
+    fullText += text;
   }
   return {
     text: fullText,

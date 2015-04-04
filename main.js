@@ -18,8 +18,8 @@ function main(skipClass){
     if(text === '') continue;
     nodeMappings = nodeMappings.concat([
       {
-        start: fullText.length + 1
-        end: fullText.length + 1 + text.length
+        start: fullText.length + 1,
+        end: fullText.length + 1 + text.length,
         node: n
       }
     ]);

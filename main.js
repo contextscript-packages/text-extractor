@@ -19,7 +19,7 @@ export default (options) => {
     if(("matches" in n) && skipSelectors.some((selector)=> n.matches(selector))) {
       n = walk.nextSibling();
     }
-    if(!("nodeType" in n) || n.nodeType !== 3) continue;
+    if(!n || n.nodeType !== 3) continue;
     if(n.parentElement.tagName in {"STYLE":"", "SCRIPT":"", "NOSCRIPT":""}) continue;
     text = n.nodeValue.trim();
     if(text === '') continue;

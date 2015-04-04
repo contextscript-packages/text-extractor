@@ -1,7 +1,11 @@
 (function(){
 
-function main(skipClass){
-  console.log(`hello ES6 world!`);
+function main(skipSelectors){
+  if(!skipSelectors) {
+    skipSelectors = []
+  } else if(typeof skipSelectors === "string") {
+    skipSelectors = [skipSelectors];
+  }
   var walk = document.createTreeWalker(document, NodeFilter.SHOW_ALL, null, false);
   var fullText = "";
   // The mappings from text ranges to their corresponding HTML nodes.
@@ -9,7 +13,7 @@ function main(skipClass){
   var n;
   var text;
   while(n=walk.nextNode()) {
-    if(n.classList && (n.classList.contains(skipClass))) {
+    if(skipSelectors.some((selector)=> n.matches(selector))) {
       n = walk.nextSibling();
     }
     if(n.nodeType !== 3) continue;
@@ -25,7 +29,6 @@ function main(skipClass){
     ]);
     fullText += " " + text;
   }
-  var allText = fragments.join(' ');
   return {
     text: fullText,
     nodeMappings: nodeMappings

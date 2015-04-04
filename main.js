@@ -1,6 +1,6 @@
-(function(){
-
-function main(skipSelectors){
+import * as _ from 'underscore';
+export function main(skipSelectors){
+  console.log(_);
   if(!skipSelectors) {
     skipSelectors = []
   } else if(typeof skipSelectors === "string") {
@@ -33,13 +33,4 @@ function main(skipSelectors){
     text: fullText,
     nodeMappings: nodeMappings
   };
-};
-
-if (typeof exports !== 'undefined') {
-  if (typeof module !== 'undefined' && module.exports) {
-    exports = module.exports = main;
-  }
-  exports.main = main;
 }
-
-}.call(this));

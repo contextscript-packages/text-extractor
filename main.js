@@ -1,35 +1,42 @@
 (function(){
 
-var _ = require("underscore");
-
-function main(){
-  console.log(_);
+function main(skipClass){
+  console.log(`hello ES6 world!`);
   var walk = document.createTreeWalker(document, NodeFilter.SHOW_ALL, null, false);
-  var fragments = [];
+  var fullText = "";
+  // The mappings from text ranges to their corresponding HTML nodes.
+  var nodeMappings = [];
   var n;
   var text;
   while(n=walk.nextNode()) {
-    if(n.classList && (n.classList.contains('ctxscript-container'))) {
+    if(n.classList && (n.classList.contains(skipClass))) {
       n = walk.nextSibling();
     }
     if(n.nodeType !== 3) continue;
     if(n.parentElement.tagName in {"STYLE":"", "SCRIPT":"", "NOSCRIPT":""}) continue;
     text = n.nodeValue.trim();
     if(text === '') continue;
-    fragments = fragments.concat(text);
+    nodeMappings = nodeMappings.concat([
+      {
+        start: fullText.length + 1
+        end: fullText.length + 1 + text.length
+        node: n
+      }
+    ]);
+    fullText += " " + text;
   }
   var allText = fragments.join(' ');
-  return allText;
+  return {
+    text: fullText,
+    nodeMappings: nodeMappings
+  };
 };
 
-var root = this;
 if (typeof exports !== 'undefined') {
   if (typeof module !== 'undefined' && module.exports) {
     exports = module.exports = main;
   }
   exports.main = main;
-} else {
-  root.main = main;
 }
 
 }.call(this));

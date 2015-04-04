@@ -1,7 +1,8 @@
 export default (options) => {
-  var skipSelectors;
   if(options) {
-    { skipSelectors } = options;
+    var { skipSelectors } = options;
+  } else {
+    var skipSelectors = null;
   }
   if(!skipSelectors) {
     skipSelectors = []

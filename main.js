@@ -1,14 +1,4 @@
-export default (options) => {
-  if(options) {
-    var { skipSelectors } = options;
-  } else {
-    var skipSelectors = null;
-  }
-  if(!skipSelectors) {
-    skipSelectors = []
-  } else if(typeof skipSelectors === "string") {
-    skipSelectors = [skipSelectors];
-  }
+export default ({ skipSelector } = {}) => {
   var walk = document.createTreeWalker(document, NodeFilter.SHOW_ALL, null, false);
   var fullText = "";
   // The mappings from text ranges to their corresponding HTML nodes.
@@ -16,7 +6,7 @@ export default (options) => {
   var n;
   var text;
   while(n=walk.nextNode()) {
-    if(("matches" in n) && skipSelectors.some((selector)=> n.matches(selector))) {
+    if(skipSelector && ("matches" in n) && n.matches(skipSelector)) {
       n = walk.nextSibling();
     }
     if(!n || n.nodeType !== 3) continue;

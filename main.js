@@ -23,7 +23,7 @@ export default (options) => {
     if(n.parentElement.tagName in {"STYLE":"", "SCRIPT":"", "NOSCRIPT":""}) continue;
     text = n.nodeValue.trim();
     if(text === '') continue;
-    if(fullText.slice(-1) !== " ") {
+    if(fullText.length !== 0) {
       fullText += " ";
     }
     nodeMappings = nodeMappings.concat([

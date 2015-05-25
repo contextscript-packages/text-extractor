@@ -6,7 +6,13 @@ export default ({ skipSelector } = {}) => {
   var n;
   var text;
   while(n=walk.nextNode()) {
-    if(skipSelector && ("matches" in n) && n.matches(skipSelector)) {
+    if(
+      (
+        ("style" in n) && n.style.display === "none"
+      ) || (
+        skipSelector && ("matches" in n) && n.matches(skipSelector)
+      )
+    ) {
       n = walk.nextSibling();
     }
     if(!n || n.nodeType !== 3) continue;
